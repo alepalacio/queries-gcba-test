@@ -23,6 +23,10 @@ select smp1, count(smp1) from mindesarrollourbanoytransporte_codigourbanistico
 group by smp1 
 having count(1) > 1
 
+select smp, geom, count(smp) from cur3d_parcela
+group by smp, geom 
+having count(1) > 1
+
 select geom from cur3d_parcela where smp = '023-162-000'
 
 select geom from cur3d_parcela where smp = '021-019-014a'
