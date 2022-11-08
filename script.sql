@@ -143,3 +143,30 @@ select * from cur3d_manzanaatipica
 select count(1) from  cur3d_manzanaatipica
 
 select count(distinct sm) from  cur3d_manzanaatipica
+
+select algoritmo.actualizarciudad3d_2()
+
+select count(1) from public.cur3d_manzana cdm 
+select count(1) from algoritmo.manzana m 
+truncate table public.cur3d_manzana restart identity cascade;
+truncate table public.cur3d_parcela  restart identity cascade;
+truncate table public.cur3d_manzanaatipica  restart identity cascade;
+truncate table public.mindesarrollourbanoytransporte_codigourbanistico  restart identity cascade;
+truncate table public.cur3d_areaproteccionhistorica  restart identity cascade;
+truncate table public.cur3d_superficieedificableplanta  restart identity cascade;
+truncate table algoritmo.manzana  restart identity cascade;
+truncate table algoritmo.parcela  restart identity cascade;
+
+SELECT
+	sm, tipo,
+	st_force2d( st_transform(ST_SetSRID(geom,4326), 97433)),
+	localtimestamp, localtimestamp, '', '', true,true, 'ALGORITMO'
+FROM algoritmo.manzana
+
+select st_asewkt(geom) from cur3d_manzana;
+
+select st_asewkt(geom) from algoritmo.manzana;
+
+
+INSERT INTO public.cur3d_manzana (sm, tipo, geom, timestamp_alta, timestamp_modificacion, observaciones_publicables, observaciones_privadas, publicable,verificado, fuente)	  
+(SELECT sm, tipo, ST_SetSRID(geom, 97433), localtimestamp, localtimestamp, '', '', true,true, 'ALGORITMO' FROM algoritmo.manzana);
